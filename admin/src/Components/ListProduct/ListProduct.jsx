@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react'
 import './ListProduct.css'
+import cross_icon from '../../assets/cross_icon.png'
 
 const ListProduct = () => {
 
@@ -16,9 +17,21 @@ const ListProduct = () => {
       fetchInfo();
     },[])
 
+    const remove_product = async (id)=>{
+      await fetch('http://localhost:4000/removeproduct',{
+        method:'POST',
+        headers:{
+          Accept:'application/json',
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify({id:id})
+      })
+      await fetchInfo();
+    }
+
   return (
     <div className='list-product'>
-      <h1>All Products List</h1>
+      <h2>All Products List</h2>
       <div className="listproduct-format-main">
         <p>Products</p>
         <p>Title</p>
@@ -30,9 +43,17 @@ const ListProduct = () => {
       <div className="listproduct-allproducts">
         <hr />
         {allproducts.map((product,index)=>{
-          return <div className="listproduct-format-main listproduct-format">
-
+          return <>
+          <div key={index} className="listproduct-format-main listproduct-format">
+            <img src={product.image} alt='' className='listproduct-product-icon' />
+            <p>{product.name}</p>
+            <p>${product.old_price}</p>
+            <p>${product.new_price}</p>
+            <p>{product.category}</p>
+            <img onClick={()=>{remove_product(product.id)}} className='listproduct-remove-icon' src={cross_icon} alt='' />
           </div>
+          <hr />
+          </>
         })}
       </div>
     </div>
