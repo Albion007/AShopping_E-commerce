@@ -7,7 +7,7 @@ const LoginSignup = () => {
   const [formData,setFormData] = useState({
     username:"",
     password:"",
-    email:""
+    email:""   
   })
 
   const changeHandler = (e)=>{
@@ -16,10 +16,12 @@ const LoginSignup = () => {
 
   const login = async () =>{
     console.log("Login function executed",formData);
+  
   }
 
   const signup = async () =>{
     console.log("Signup function executed",formData);
+  
   }
 
   return (
@@ -28,8 +30,8 @@ const LoginSignup = () => {
         <h1>{state}</h1>
         <div className="loginsignup-fields">
           {state==="Sign Up"?<input name="username" value={formData.username} onChange={changeHandler} type='text' placeholder='Name' />:<></>}
-          <input type='email' value={formData.email} onChange={changeHandler} placeholder='Email' />
-          <input type='password' value={formData.password} onChange={changeHandler} placeholder='Passowrd' />
+          <input name="email" value={formData.email} onChange={changeHandler} type='email' placeholder='Email' />
+          <input name="password" value={formData.password} onChange={changeHandler} type='password' placeholder='Password' />
         </div>
         <button onClick={()=>{state==="Login"?login():signup()}}>Continue</button>
         {state==="Sign Up"
