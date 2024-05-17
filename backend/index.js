@@ -14,13 +14,11 @@ app.use(cors());
 mongoose.connect("mongodb+srv://albionmorina44:123123123@cluster0.diu6sr1.mongodb.net/");
 
 // API Creation
-
 app.get("/",(req,res)=>{
     res.send("Express app is running")
 })
 
 // Image Storage Engine
-
 const storage = multer.diskStorage({
     destination: './upload/images',
     filename:(req,file,cb)=>{
@@ -42,7 +40,6 @@ app.post("/upload",upload.single('product'),(req,res)=>{
 })
 
 //Schema for creating products
-
 const Product = mongoose.model("Product",{
     id:{
         type: Number,
